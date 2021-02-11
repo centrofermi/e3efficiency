@@ -1,0 +1,21 @@
+# Code updated on 10/09/2017
+
+#load libs
+source enveeeroot
+
+#run to get calibration on a run with trigger in triple coincs
+eeereco.exe -b -r -c path_to_run_with_triple
+#and remove output for that run
+rm *.root *.eee
+
+# command example to extrct the commant to be run to get results
+cat /data/BOLO-01/data/Efficiency/2017-09-08/summary_C1.txt |awk '{print "./mkpoint.sh BOLO-01 2017-09-08",$5,$3,$4,"0"}'
+cat /data/BOLO-01/data/Efficiency/2017-09-08/summary_C2.txt |awk '{print "./mkpoint.sh BOLO-01 2017-09-08",$6,$3,$4,"1"}'
+cat /data/BOLO-01/data/Efficiency/2017-09-08/summary_C3.txt |awk '{print "./mkpoint.sh BOLO-01 2017-09-08",$7,$3,$4,"2"}'
+# you should get something like
+#./mkonlyresults.sh BOLO-01 2017-09-08 18790 31 35 0
+#./mkonlyresults.sh BOLO-01 2017-09-08 19190 36 40 0
+# run those commands (skip the lines with no sense)
+
+#results_X --> old results (no fit), X=0,1,2
+#newresults_X --> new results from the fit (best!), X=0,1,2
